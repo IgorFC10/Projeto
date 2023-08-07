@@ -1,33 +1,73 @@
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
-public class AppTest 
-    extends TestCase
+public class Atribuicao extends Comando
 {
-    /**
-     * Create the test
-     *
-     * @param testName name of the test
-     */
-    public AppTest( String test )
-    {
-        super( testName );
-    }
+	private String _atribuido = "";
+	private String _valor = "";
+	private String _sinal = "";
+	private String _resultado = "";
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
+	public Atribuicao(String id)
+	{
+		_atribuido = id;
+	}
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
+	public Atribuicao()
+	{
+
+	}
+
+	public void setValor(String valor)
+	{
+		_valor = valor;
+	}
+
+	public String getAtribuido()
+	{
+		return _atribuido;
+	}
+
+	public void setSinal(String sinal)
+	{	
+		if (sinal.equals("-") || sinal.equals("+") || sinal.equals("*") || sinal.equals("/") || sinal.equals("%"))
+		{
+			_sinal = sinal;
+		}else
+		{
+			_sinal = "";
+		}
+		
+	}
+
+	public String getSinal()
+	{
+		return _sinal;
+	}
+
+	public ComandoTipo getTipo()
+	{
+		return ComandoTipo.Atribuicao;
+	}
+
+	public String toJava()
+	{
+		return _atribuido + " = " + _resultado + ";\n";
+	}
+
+	public String getTipoValido()
+	{
+		//System.out.println(_resultado);
+		if (_resultado.contains("."))
+		{
+			return "double";
+		}
+		else
+		{
+			return "";
+		}
+	}	
+
+	public void juntar()
+	{
+		_valor = _sinal + _valor;
+		_resultado = _resultado + _valor;
+	}
 }
